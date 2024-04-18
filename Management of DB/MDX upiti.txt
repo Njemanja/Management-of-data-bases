@@ -1,0 +1,30 @@
+
+select measures.members on columns,
+[narudzbina.hnarudzbina].members on rows,
+[kategorija].members on pages
+from artikal
+
+
+select measures.prodato on columns,
+non empty [prodavac.hmesto].members on rows
+from artikal
+
+
+select measures.broj on columns,
+  [mesec].members on rows
+from recenzija
+
+select measures.prosecnaOcena on columns,
+non empty crossjoin([artikal.hkat].children,[prodavac.hmesto].children )on rows
+from recenzija
+
+select {measures.maksimalna, measures.minimalna} on columns,
+[prodavac.hidkor].members on rows
+from recenzija
+
+
+//select measures.members on columns,
+non empty crossjoin( {[narudzbina.hnarudzbina].Children},
+{[kategorija].Children}) on rows
+
+from artikal
